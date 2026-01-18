@@ -1,0 +1,49 @@
+# This file defines DATA CONTRACTS and TESTS
+# It ensures your data is reliable before users see it
+
+version: 2
+
+models:
+  - name: stg_telegram_messages
+    columns:
+      - name: message_id
+        tests:
+          - unique
+          - not_null
+
+  - name: fct_messages
+    description: "One row per Telegram message. Core fact table."
+    columns:
+      - name: message_id
+        description: "Unique Telegram message ID"
+        tests:
+          - unique
+          - not_null
+      - name: channel_key
+        description: "FK to dim_channels"
+        tests:
+          - relationships:
+              to: ref('dim_channels')
+              field: channel_key
+      - name: date_key
+        description: "FK to dim_dates"
+        tests:
+          - relationships:
+              to: ref('dim_dates')
+              field: date_key
+
+  - name: dim_channels
+    description: "Telegram channels selling medical products"
+    columns:
+      - name: channel_key
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_dates
+    description: "Standard date dimension"
+    columns:
+      - name: date_key
+        tests:
+          - unique
+          - not_null

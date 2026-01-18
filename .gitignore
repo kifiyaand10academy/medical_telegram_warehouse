@@ -1,0 +1,5 @@
+.env
+/data/
+.venv
+session_name.session
+venv
