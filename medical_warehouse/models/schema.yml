@@ -47,3 +47,15 @@ models:
         tests:
           - unique
           - not_null
+          
+  - name: fct_image_detections
+    description: "YOLO-based image classification results linked to Telegram messages"
+    columns:
+      - name: message_id
+        description: "Telegram message ID (FK to fct_messages)"
+        tests:
+          - relationships:
+              to: ref('fct_messages')
+              field: message_id
+      - name: image_category
+        description: "Business category: promotional, product_display, lifestyle, other"

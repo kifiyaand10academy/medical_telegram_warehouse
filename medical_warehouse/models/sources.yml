@@ -5,3 +5,5 @@ sources:
     description: "Raw Telegram data"
     tables:
       - name: telegram_messages
+      - name: yolo_detections
+        description: "YOLO object detection results on Telegram images"
